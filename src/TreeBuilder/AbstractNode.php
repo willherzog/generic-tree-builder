@@ -26,7 +26,7 @@ abstract class AbstractNode implements NodeInterface
 		return $this->parent;
 	}
 
-	final public function end(): NodeInterface
+	final public function end(): LeafNodeInterface|BranchNodeInterface|RootNodeInterface
 	{
 		if( !$this->hasParent() ) {
 			throw new \LogicException('This method can only be called on child nodes.');

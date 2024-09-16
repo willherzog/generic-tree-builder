@@ -9,5 +9,5 @@ interface NodeInterface
 {
 	public function getParent(): ?NodeInterface;
 
-	public function end(): NodeInterface;
+	public function end(): LeafNodeInterface|BranchNodeInterface|RootNodeInterface;
 }
