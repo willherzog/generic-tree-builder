@@ -8,4 +8,6 @@ namespace WHPHP\TreeBuilder;
 interface NodeInterface
 {
 	public function getParent(): ?NodeInterface;
+
+	public function end(): NodeInterface;
 }

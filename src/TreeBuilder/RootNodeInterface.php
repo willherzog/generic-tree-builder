@@ -5,7 +5,7 @@ namespace WHPHP\TreeBuilder;
 /**
  * @author Will Herzog <willherzog@gmail.com>
  */
-interface RootNodeInterface extends NodeInterface
+interface RootNodeInterface
 {
 	public function addLeaf(...$leafParams): LeafNodeInterface;
 
@@ -18,4 +18,6 @@ interface RootNodeInterface extends NodeInterface
 	public function getBranch(string $branchName): ?BranchNodeInterface;
 
 	public function getBranches(): iterable;
+
+	public function getParent(): null;
 }

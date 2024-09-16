@@ -82,7 +82,7 @@ final class RootNode implements RootNodeInterface
 		return $this->branches;
 	}
 
-	public function getParent(): ?NodeInterface
+	public function getParent(): null
 	{
 		return null;
 	}
