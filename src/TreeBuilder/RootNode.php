@@ -19,13 +19,13 @@ class RootNode implements RootNodeInterface
 
 	public function __construct(string $leafClass, string $branchClass)
 	{
-		if( class_exists($leafClass) && in_array(LeafNodeInterface::class, class_parents($leafClass), true) ) {
+		if( class_exists($leafClass) && in_array(LeafNodeInterface::class, class_implements($leafClass), true) ) {
 			$this->leafClass = $leafClass;
 		} else {
 			throw new InvalidNodeClassException(LeafNodeInterface::class, $leafClass);
 		}
 
-		if( class_exists($branchClass) && in_array(BranchNodeInterface::class, class_parents($branchClass), true) ) {
+		if( class_exists($branchClass) && in_array(BranchNodeInterface::class, class_implements($branchClass), true) ) {
 			$this->branchClass = $branchClass;
 		} else {
 			throw new InvalidNodeClassException(BranchNodeInterface::class, $branchClass);
