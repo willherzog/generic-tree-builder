@@ -7,7 +7,7 @@ namespace WHPHP\TreeBuilder;
  */
 interface NodeInterface
 {
-	public function getParent(): ?NodeInterface;
+	public function getParent(): NodeInterface|RootNodeInterface|null;
 
 	public function end(): LeafNodeInterface|BranchNodeInterface|RootNodeInterface;
 }

@@ -21,7 +21,7 @@ abstract class AbstractNode implements NodeInterface
 		return $this->parent !== null;
 	}
 
-	final public function getParent(): ?NodeInterface
+	final public function getParent(): NodeInterface|RootNodeInterface|null
 	{
 		return $this->parent;
 	}
