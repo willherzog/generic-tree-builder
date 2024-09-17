@@ -9,7 +9,7 @@ use WHPHP\TreeBuilder\Exception\InvalidNodeClassException;
  *
  * @author Will Herzog <willherzog@gmail.com>
  */
-final class RootNode implements RootNodeInterface
+class RootNode implements RootNodeInterface
 {
 	private string $leafClass;
 	private string $branchClass;
@@ -82,7 +82,7 @@ final class RootNode implements RootNodeInterface
 		return $this->branches;
 	}
 
-	public function getParent(): null
+	final public function getParent(): null
 	{
 		return null;
 	}
