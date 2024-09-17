@@ -9,7 +9,7 @@ abstract class AbstractNode implements NodeInterface
 {
 	private $parent;
 
-	final public function setParent(NodeInterface $node): self
+	final public function setParent(NodeInterface|RootNodeInterface $node): static
 	{
 		$this->parent = $node;
 

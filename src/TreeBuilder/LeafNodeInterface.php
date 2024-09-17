@@ -7,7 +7,7 @@ namespace WHPHP\TreeBuilder;
  */
 interface LeafNodeInterface extends NodeInterface
 {
-	public function setParent(NodeInterface $node): NodeInterface;
+	public function setParent(NodeInterface|RootNodeInterface $node): static;
 
 	public function hasParent(): bool;
 }
