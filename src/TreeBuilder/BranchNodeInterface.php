@@ -9,9 +9,7 @@ interface BranchNodeInterface extends LeafNodeInterface
 {
 	public function addLeaf(...$leafParams): LeafNodeInterface;
 
-	public function getLeaves(): iterable;
-
 	public function addBranch(...$branchParams): BranchNodeInterface;
 
-	public function getBranches(): iterable;
+	public function getNodes(): iterable;
 }

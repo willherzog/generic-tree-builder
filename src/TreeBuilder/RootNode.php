@@ -2,7 +2,7 @@
 
 namespace WHPHP\TreeBuilder;
 
-use WHPHP\TreeBuilder\Exception\DuplicateBranchNameException;
+use WHPHP\TreeBuilder\Exception\DuplicateNodeNameException;
 use WHPHP\TreeBuilder\Exception\InvalidNodeClassException;
 
 /**
@@ -15,8 +15,7 @@ class RootNode implements RootNodeInterface
 	private string $leafClass;
 	private string $branchClass;
 
-	private array $leaves = [];
-	private array $branches = [];
+	private array $nodes = [];
 
 	public function __construct(string $leafClass, string $branchClass)
 	{
@@ -33,54 +32,53 @@ class RootNode implements RootNodeInterface
 		}
 	}
 
-	public function addLeaf(...$leafParams): LeafNodeInterface
+	public function addLeaf(string $nodeName, ...$leafParams): LeafNodeInterface
 	{
 		$leaf = new $this->leafClass(...$leafParams);
 
-		$leaf->setParent($this);
+		if( !isset($this->nodes[$nodeName]) ) {
+			$leaf->setParent($this);
 
-		$this->leaves[] = $leaf;
+			$this->nodes[$nodeName] = $leaf;
+		} else {
+			throw new DuplicateNodeNameException($nodeName);
+		}
 
 		return $leaf;
 	}
 
-	public function getLeaves(): iterable
-	{
-		return $this->leaves;
-	}
-
-	public function addBranch(string $branchName, ...$branchParams): BranchNodeInterface
+	public function addBranch(string $nodeName, ...$branchParams): BranchNodeInterface
 	{
 		$branch = new $this->branchClass(...$branchParams);
 
-		if( !isset($this->branches[$branchName]) ) {
+		if( !isset($this->nodes[$nodeName]) ) {
 			$branch->setParent($this);
 
-			$this->branches[$branchName] = $branch;
+			$this->nodes[$nodeName] = $branch;
 		} else {
-			throw new DuplicateBranchNameException($branchName);
+			throw new DuplicateNodeNameException($nodeName);
 		}
 
 		return $branch;
 	}
 
-	public function hasBranch(string $branchName): bool
+	public function hasNode(string $nodeName): bool
 	{
-		return isset($this->branches[$branchName]);
+		return isset($this->nodes[$nodeName]);
 	}
 
-	public function getBranch(string $branchName): ?BranchNodeInterface
+	public function getNode(string $branchName): LeafNodeInterface|BranchNodeInterface|null
 	{
-		if( isset($this->branches[$branchName]) ) {
-			return $this->branches[$branchName];
+		if( isset($this->nodes[$branchName]) ) {
+			return $this->nodes[$branchName];
 		}
 
 		return null;
 	}
 
-	public function getBranches(): iterable
+	public function getNodes(): iterable
 	{
-		return $this->branches;
+		return $this->nodes;
 	}
 
 	final public function getParent(): null

@@ -7,17 +7,15 @@ namespace WHPHP\TreeBuilder;
  */
 interface RootNodeInterface
 {
-	public function addLeaf(...$leafParams): LeafNodeInterface;
+	public function addLeaf(string $nodeName, ...$leafParams): LeafNodeInterface;
 
-	public function getLeaves(): iterable;
+	public function addBranch(string $nodeName, ...$branchParams): BranchNodeInterface;
 
-	public function addBranch(string $branchName, ...$branchParams): BranchNodeInterface;
+	public function hasNode(string $nodeName): bool;
 
-	public function hasBranch(string $branchName): bool;
+	public function getNode(string $nodeName): LeafNodeInterface|BranchNodeInterface|null;
 
-	public function getBranch(string $branchName): ?BranchNodeInterface;
-
-	public function getBranches(): iterable;
+	public function getNodes(): iterable;
 
 	public function getParent(): null;
 }
