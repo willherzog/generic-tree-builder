@@ -2,6 +2,7 @@
 
 namespace WHPHP\TreeBuilder;
 
+use WHPHP\TreeBuilder\Exception\DuplicateBranchNameException;
 use WHPHP\TreeBuilder\Exception\InvalidNodeClassException;
 
 /**
@@ -57,7 +58,7 @@ class RootNode implements RootNodeInterface
 
 			$this->branches[$branchName] = $branch;
 		} else {
-			throw new \LogicException(sprintf('A branch named "%s" already exists.', $branchName));
+			throw new DuplicateBranchNameException($branchName);
 		}
 
 		return $branch;
