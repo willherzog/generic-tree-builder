@@ -34,7 +34,7 @@ class RootNode implements RootNodeInterface
 
 	public function addLeaf(string $nodeName, ...$leafParams): LeafNodeInterface
 	{
-		$leaf = new $this->leafClass(...$leafParams);
+		$leaf = new $this->leafClass($nodeName, ...$leafParams);
 
 		if( !isset($this->nodes[$nodeName]) ) {
 			$leaf->setParent($this);
@@ -49,7 +49,7 @@ class RootNode implements RootNodeInterface
 
 	public function addBranch(string $nodeName, ...$branchParams): BranchNodeInterface
 	{
-		$branch = new $this->branchClass(...$branchParams);
+		$branch = new $this->branchClass($nodeName, ...$branchParams);
 
 		if( !isset($this->nodes[$nodeName]) ) {
 			$branch->setParent($this);
